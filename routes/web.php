@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ListController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TrendPostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +27,14 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.profile.index');
-    })->name('dashboard');
+    //admin home page route
+    Route::get('dashboard', [ProfileController::class, 'index'])->name('dashboard');
+    //admin list route
+    Route::get('admin/list', [ListController::class, 'index'])->name('admin.list');
+    //post list
+    Route::get('post', [PostController::class, 'index'])->name('admin.post');
+    //category list
+    Route::get('category', [CategoryController::class, 'index'])->name('admin.category');
+    //trend post
+    Route::get('trendpost', [TrendPostController::class, 'index'])->name('admin.trendpost');
 });

@@ -33,55 +33,46 @@
                         data-accordion="false">
 
                         <li class="nav-item">
-                            <a href="myProfile.html" class="nav-link">
+                            <a href="{{ route('dashboard') }}" class="nav-link">
                                 <i class="fas fa-user-circle"></i>
                                 <p>
-                                    My Profile
+                                    Dashboard
                                 </p>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="category.html" class="nav-link">
-                                <i class="fas fa-list"></i>
-                                <p>
-                                    Category
-                                </p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="pizza.html" class="nav-link">
-                                <i class="fas fa-pizza-slice ms-5"></i>
-                                <p>
-                                    Pizza
-                                </p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="user.html" class="nav-link">
+                            <a href="{{ route('admin.list') }}" class="nav-link">
                                 <i class="fas fa-users"></i>
                                 <p>
-                                    User
+                                    Admin List
                                 </p>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="order.html" class="nav-link">
+                            <a href="{{ route('admin.category') }}" class="nav-link">
+                                <i class="fas fa-list ms-5"></i>
+                                <p>
+                                    Category List
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('admin.post') }}" class="nav-link">
                                 <i class="fas fa-book"></i>
                                 <p>
-                                    Order
+                                    Post
                                 </p>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="carrier.html" class="nav-link">
-                                <i class="fas fa-biking"></i>
+                            <a href="{{ route('admin.trendpost') }}" class="nav-link">
+                                <i class="fas fa-book-open"></i>
                                 <p>
-                                    Carrier
+                                    Trend Post
                                 </p>
                             </a>
                         </li>
@@ -92,7 +83,6 @@
                                 <button class="btn btn-danger w-100" type="submit">
                                     <i class="fas fa-sign-out-alt">Log Out</i>
                                 </button>
-
                             </form>
                         </li>
                     </ul>
