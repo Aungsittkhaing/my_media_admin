@@ -29,6 +29,8 @@ Route::middleware([
 ])->group(function () {
     //admin home page route
     Route::get('dashboard', [ProfileController::class, 'index'])->name('dashboard');
+    Route::post('admin/update', [ProfileController::class, 'updateAdminAcount'])->name('admin.update');
+
     //admin list route
     Route::get('admin/list', [ListController::class, 'index'])->name('admin.list');
     //post list
