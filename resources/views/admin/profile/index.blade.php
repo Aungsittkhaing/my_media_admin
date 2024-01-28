@@ -24,29 +24,46 @@
                                 <div class="form-group row">
                                     <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="adminName" value="{{ $user->name }}"
-                                            class="form-control" id="inputName" placeholder="Name">
+                                        <input type="text" name="adminName" value="{{ old('adminName', $user->name) }}"
+                                            class="form-control @error('adminName') is-invalid
+                                            @enderror"
+                                            placeholder="Enter your name...">
+
+                                        {{-- @if ($errors->has('adminName'))
+                                            <p>{{ $errors->first('adminName') }}</p>
+                                        @endif --}}
+
+                                        @error('adminName')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                                     <div class="col-sm-10">
-                                        <input type="email" name="adminEmail" value="{{ $user->email }}"
-                                            class="form-control" id="inputEmail" placeholder="Email">
+                                        <input type="email" name="adminEmail"
+                                            value="{{ old('adminEmail', $user->email) }}"
+                                            class="form-control @error('adminEmail')
+                                                is-invalid
+                                            @enderror"
+                                            id="inputEmail" placeholder="Enter your email...">
+                                        @error('adminEmail')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="inputPhone" class="col-sm-2 col-form-label">Phone</label>
                                     <div class="col-sm-10">
                                         <input type="text" name="adminPhone" value="{{ $user->phone }}"
-                                            class="form-control" id="inputPhone" placeholder="Phone">
+                                            class="form-control" id="inputPhone" placeholder="Enter your phone number...">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="inputAddress" class="col-sm-2 col-form-label">Address</label>
                                     <div class="col-sm-10">
-                                        <textarea name="adminAddress" class="form-control" cols="30" rows="10">{{ $user->address }}</textarea>
+                                        <textarea name="adminAddress" class="form-control" cols="30" rows="10" placeholder="Enter your address...">{{ $user->address }}</textarea>
                                     </div>
                                 </div>
 

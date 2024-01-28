@@ -6,6 +6,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
@@ -20,9 +21,14 @@ class ProfileController extends Controller
     public function updateAdminAcount(Request $request)
     {
         $userData = $this->getUserInfo($request);
+        $validator = $this->userValidationCheck($request);
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
         User::where('id', Auth::user()->id)->update($userData);
         return back()->with(['updateSuccess' => 'Admin account updated!']);
     }
+    //get user info
     private function getUserInfo($request)
     {
         return [
@@ -33,5 +39,13 @@ class ProfileController extends Controller
             "gender" => $request->adminGender,
             "updated_at" => Carbon::now()
         ];
+    }
+    //user validation check
+    private function userValidationCheck($request)
+    {
+        return Validator::make($request->all(), [
+            'adminName' => 'required',
+            'adminEmail' => 'required'
+        ]);
     }
 }
