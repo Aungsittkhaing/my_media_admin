@@ -95,7 +95,7 @@
                             </form>
                             <div class="form-group row">
                                 <div class="offset-sm-2 col-sm-10">
-                                    <a href="">Change Password</a>
+                                    <a href="{{ route('admin.changepassword') }}">Change Password</a>
                                 </div>
                             </div>
                         </div>

@@ -6,6 +6,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
@@ -28,6 +29,37 @@ class ProfileController extends Controller
         User::where('id', Auth::user()->id)->update($userData);
         return back()->with(['updateSuccess' => 'Admin account updated!']);
     }
+    //direct change password
+    public function changingPassword()
+    {
+        return view('admin.profile.changePassword');
+    }
+    //change password
+    public function changePassword(Request $request)
+    {
+        $validator = $this->passwordValidationCheck($request);
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+        $dbData = User::where('id', Auth::user()->id)->first();
+        $dbPassword = $dbData->password;
+
+        $hashUserPassword = Hash::make($request->newPassword);
+        $old = Hash::make($request->oldPassword);
+
+        $updateData = [
+            'password' => $hashUserPassword,
+            'updated_at' => Carbon::now()
+        ];
+
+        if (Hash::check($request->oldPassword, $dbPassword)) {
+            User::where('id', Auth::user()->id)->update($updateData);
+            return redirect()->route('dashboard');
+        } else {
+            return back()->with(['fail' => 'passwordမှန်အောင်ထည့်မအေလိုး!']);
+        }
+    }
+
     //get user info
     private function getUserInfo($request)
     {
@@ -47,5 +79,18 @@ class ProfileController extends Controller
             'adminName' => 'required',
             'adminEmail' => 'required'
         ]);
+    }
+    //password validation check
+    private function passwordValidationCheck($request)
+    {
+        $validationRules = [
+            'oldPassword' => 'required',
+            'newPassword' => 'required|min:8|max:15',
+            'passwordConfirmation' => 'required|same:newPassword|min:8|max:15'
+        ];
+        $validationMessages = [
+            'confirmPassword.same' => 'New password & Confirm password must be same!'
+        ];
+        return Validator::make($request->all(), $validationRules, $validationMessages);
     }
 }
