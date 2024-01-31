@@ -5,16 +5,23 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Admin Lists</h3>
+                @if (request()->has('keyword'))
+                    [Search result by '{{ request()->keyword }}']
+                @endif
                 <div class="card-tools">
-                    <div class="input-group input-group-sm" style="width: 150px;">
-                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                    <form action="{{ route('admin.listSearch') }}" method="post">
+                        @csrf
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" name="adminSearchKey" class="form-control float-right"
+                                placeholder="Search">
 
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-default">
-                                <i class="fas fa-search"></i>
-                            </button>
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-default">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             {{-- alert start --}}
@@ -51,12 +58,14 @@
                                 <td>{{ $user->address }}</td>
                                 <td>{{ $user->gender }}</td>
                                 <td>
-                                    <a @if (count($userData) == 1) href="#"
+                                    @if (auth()->user()->id != $user->id)
+                                        <a @if (count($userData) == 1) href="#"
                                     @else
                                     href="{{ route('admin.accountDelete', $user->id) }}" @endif
-                                        class="btn btn-sm bg-danger text-white"
-                                        onclick="return confirm('Are you sure to delete?')"><i
-                                            class="fas fa-trash-alt"></i></a>
+                                            class="btn btn-sm bg-danger text-white"
+                                            onclick="return confirm('Are you sure to delete?')"><i
+                                                class="fas fa-trash-alt"></i></a>
+                                    @endif
 
                                 </td>
                             </tr>
