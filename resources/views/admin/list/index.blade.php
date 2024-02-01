@@ -5,9 +5,6 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Admin Lists</h3>
-                @if (request()->has('keyword'))
-                    [Search result by '{{ request()->keyword }}']
-                @endif
                 <div class="card-tools">
                     <form action="{{ route('admin.listSearch') }}" method="post">
                         @csrf
