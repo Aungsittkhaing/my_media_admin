@@ -3,6 +3,8 @@
 /public/build
 /public/plugins
 /public/dist
+/public/postImage
+/public/defaultImage
 /public/hot
 /public/storage
 /storage/*.key

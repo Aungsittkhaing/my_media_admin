@@ -40,6 +40,7 @@ Route::middleware([
 
     //post list
     Route::get('post', [PostController::class, 'index'])->name('admin.post');
+    Route::post('admin/createPost', [PostController::class, 'createPost'])->name('admin.createPost');
 
     //category list
     Route::get('category', [CategoryController::class, 'index'])->name('admin.category');

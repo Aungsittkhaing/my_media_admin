@@ -82,11 +82,11 @@ class CategoryController extends Controller
     private function categoryValidationCheck($request)
     {
         $validationRules = [
-            'categoryName' => 'required',
+            'categoryName' => 'required|min:3|max:50|unique:categories,title',
             'categoryDescription' => 'required',
         ];
         $validationMessages = [
-            'categoryName' => 'Category nameလေးထည့်ပေးပါဗျ',
+            'categoryName' => 'အနည်းဆုံး၃လုံးထည့်ပေးပါဗျ',
             'categoryDescription' => 'Category Descriptionလေးထည့်ပေးပါဗျ'
         ];
         return Validator::make($request->all(), $validationRules, $validationMessages);

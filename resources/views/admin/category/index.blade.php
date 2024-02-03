@@ -13,7 +13,7 @@
                         <input type="text" name="categoryName"
                             class="form-control @error('categoryName') is-invalid
                         @enderror"
-                            value="{{ old('categoryName') }}" placeholder="Enter Category Name">
+                            placeholder="Enter Category Name">
                         @error('categoryName')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
