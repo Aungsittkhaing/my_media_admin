@@ -3,14 +3,15 @@
     <div class="col-4">
         <div class="card">
             <div class="card-header text-black-50">
-                <div class="card-title">Create Post</div>
+                <div class="card-title">Edit Post</div>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.createPost') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('admin.updatePost', $postDetail->post_id) }}" method="post"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="postTitle" class="form-label">Post Name</label>
-                        <input type="text" value="{{ old('postName') }}" name="postName"
+                        <input type="text" value="{{ old('postName', $postDetail->title) }}" name="postName"
                             class="form-control @error('postName') is-invalid
                         @enderror"
                             placeholder="Enter Post Name...">
@@ -21,16 +22,21 @@
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
                         <textarea class="form-control @error('postDescription') is-invalid @enderror" name="postDescription" rows="6"
-                            placeholder="Enter Description...">{{ old('postDescription') }}</textarea>
+                            placeholder="Enter Description...">{{ old('postDescription', $postDetail->description) }}</textarea>
                         @error('postDescription')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="image" class="form-label">Image</label>
-                        <input type="file" name="imageName" value="{{ old('imageName') }}" class="form-control"
-                            placeholder="Enter Image...">
+                        <label for="image" class="form-label">Image</label><br>
+                        {{-- <input type="file" name="imageName" value="{{ old('imageName') }}" class="form-control"
+                            placeholder="Enter Image..."> --}}
 
+                        <img width="100%" class="rounded shadow"
+                            @if ($postDetail->image == null) src="{{ asset('defaultImage/default.png') }}"
+                                        @else
+                                        src="{{ asset('postImage/' . $postDetail->image) }}" @endif>
+                        <input type="file" class="form-control" name="imageName">
                     </div>
                     <div class="mb-3">
                         <label for="postCategory" class="form-label">Cateogry Name</label>
@@ -39,14 +45,15 @@
                         @enderror">
                             <option value="">Choose Category</option>
                             @foreach ($category as $product)
-                                <option value="{{ $product->category_id }}">{{ $product->title }}</option>
+                                <option value="{{ $product->category_id }}"
+                                    @if ($product->category_id == $postDetail->category_id) selected @endif>{{ $product->title }}</option>
                             @endforeach
                         </select>
                         @error('postCategory')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    <button class="btn btn-primary" type="submit">Create</button>
+                    <button class="btn btn-warning" type="submit">Update</button>
                 </form>
             </div>
         </div>
@@ -54,7 +61,7 @@
     <div class="col-8">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Category Lists</h3>
+                <h3 class="card-title">Post Lists</h3>
                 <div class="card-tools">
                     <form action="{{ route('admin.categorySearch') }}" method="post">
                         @csrf

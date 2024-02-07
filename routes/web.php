@@ -41,6 +41,9 @@ Route::middleware([
     //post list
     Route::get('post', [PostController::class, 'index'])->name('admin.post');
     Route::post('admin/createPost', [PostController::class, 'createPost'])->name('admin.createPost');
+    Route::get('admin/deletePost/{id}', [PostController::class, 'deletePost'])->name('admin.deletePost');
+    Route::get('admin/editPost/{id}', [PostController::class, 'editPost'])->name('admin.updatePostEdit');
+    Route::post('admin/updatePost/{id}', [PostController::class, 'updatePost'])->name('admin.updatePost');
 
     //category list
     Route::get('category', [CategoryController::class, 'index'])->name('admin.category');

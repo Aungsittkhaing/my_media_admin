@@ -34,23 +34,11 @@
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td>Sithu</td>
+                            <td>Aung Sitt Khaing</td>
                             <td>Seafood Pizza</td>
                             <td>Mg Kyaw Kyaw</td>
                             <td>Card</td>
-                            <td>2/2/2021</td>
-                            <td>
-                                <button class="btn btn-sm bg-dark text-white"><i class="fas fa-edit"></i></button>
-                                <button class="btn btn-sm bg-danger text-white"><i class="fas fa-trash-alt"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Tun Tun</td>
-                            <td>Seafood Pizza</td>
-                            <td>Mg Kyaw Kyaw</td>
-                            <td>Card</td>
-                            <td>2/2/2021</td>
+                            <td>2/2/2024</td>
                             <td>
                                 <button class="btn btn-sm bg-dark text-white"><i class="fas fa-edit"></i></button>
                                 <button class="btn btn-sm bg-danger text-white"><i class="fas fa-trash-alt"></i></button>
