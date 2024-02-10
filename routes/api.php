@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\api\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +23,5 @@ Route::post('user/login', [AuthController::class, 'login']);
 Route::post('user/register', [AuthController::class, 'register']);
 
 Route::get('category', [AuthController::class, 'categoryList'])->middleware('auth:sanctum');
+
+Route::get('allPostList',[PostController::class, 'getAllPost']);
