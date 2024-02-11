@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    //get all post
     public function getAllPost()
     {
         $post = Post::get();
