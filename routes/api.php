@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\api\PostController;
 use App\Http\Controllers\api\CategoryController;
+use App\Http\Controllers\api\ActionLogController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,11 +27,18 @@ Route::post('user/register', [AuthController::class, 'register']);
 //category with AuthController
 Route::get('category', [AuthController::class, 'categoryList'])->middleware('auth:sanctum');
 
-//post
+//all post list
 Route::get('allPostList',[PostController::class, 'getAllPost']);
+Route::post('post/details', [PostController::class, 'postDetails']);
 
-//category
+//all category list
 Route::get('allCategory',[CategoryController::class, 'getAllCategory']);
 
+//post search
+Route::post('post/search', [PostController::class, 'postSearch']);
+
 //category search
-Route::post('category/search', [CategoryController::class, 'categorySearch']);
+Route::post('category/search', [CategoryController::class,'categorySearch']);
+
+//action log
+Route::post('post/actionLog', [ActionLogController::class, 'setActionLog']);

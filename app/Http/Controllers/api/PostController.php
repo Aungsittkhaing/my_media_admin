@@ -16,4 +16,21 @@ class PostController extends Controller
             'post' => $post
         ]);
     }
+    //post search
+    public function postSearch(Request $request)
+    {
+        $category = Post::where('title', 'like', '%' .$request->key. '%')->get();
+        return response()->json([
+            "searchValue" => $category
+        ]);
+    }
+    //post details
+    public function postDetails(Request $request)
+    {
+        $id = $request->postId;
+        $post = Post::where('post_id', $id)->first();
+        return response()->json([
+            'post' => $post
+        ]);
+    }
 }

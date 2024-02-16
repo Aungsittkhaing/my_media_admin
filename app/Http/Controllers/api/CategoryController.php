@@ -17,13 +17,17 @@ class CategoryController extends Controller
            'category' => $category
         ]);
     }
-
-    //category search with displaying post
+    //category search
     public function categorySearch(Request $request)
     {
-        $category = Post::where('title', 'like', '%' .$request->key. '%')->get();
+        $category = Category::select('posts.*')
+            ->join('posts', 'categories.category_id', 'posts.category_id')
+        ->where('categories.title', 'like', '%'.$request->key .'%')
+            ->get();
         return response()->json([
-            "searchValue" => $category
+            'resultCategory'=> $category
         ]);
     }
+
+
 }
