@@ -22,32 +22,36 @@
                 <table class="table table-hover text-nowrap text-center">
                     <thead>
                         <tr>
-                            <th>Order ID</th>
-                            <th>Customer Name</th>
-                            <th>Pizza Name</th>
-                            <th>Carrier Name</th>
-                            <th>Payment With</th>
-                            <th>Order Time</th>
-                            <th></th>
+                            <th>ID</th>
+                            <th>Post Title</th>
+                            <th>Image</th>
+                            <th>View Count</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Aung Sitt Khaing</td>
-                            <td>Seafood Pizza</td>
-                            <td>Mg Kyaw Kyaw</td>
-                            <td>Card</td>
-                            <td>2/2/2024</td>
-                            <td>
-                                <button class="btn btn-sm bg-dark text-white"><i class="fas fa-edit"></i></button>
-                                <button class="btn btn-sm bg-danger text-white"><i class="fas fa-trash-alt"></i></button>
-                            </td>
-                        </tr>
+                        @foreach($post as $product)
+                            <tr>
+                                <td>{{ $product->post_id }}</td>
+                                <td>{{ $product->title }}</td>
+                                <td>
+                                    <img class="rounded shadow-sm" width="100px"
+                                         @if ($product->image == null) src="{{ asset('defaultImage/default.png') }}"
+                                         @else
+                                         src="{{ asset('postImage/' . $product->image) }}" @endif>
+                                </td>
+                                <td><i class="fas fa-eye"></i>{{ $product->post_count }}</td>
+                                <td>
+                                    <a href="{{ route('admin.trendPostDetails', $product->post_id) }}" class="btn btn-sm bg-dark text-white"><i class="fas fa-info-circle"></i></a>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
+{{--                {{ $post->links() }}--}}
+
             </div>
-            <!-- /.card-body -->
+        <!-- /.card-body -->
         </div>
         <!-- /.card -->
     </div>
